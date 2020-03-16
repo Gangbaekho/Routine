@@ -1,8 +1,11 @@
 package com.routine.www.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,13 +20,17 @@ public class User {
 	private String password;
 	
 	@Column(name="enabled")
-	private int enabled;
+	private boolean enabled;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="authorities_username")
+	private Authority authority;
 	
 	public User() {
 		
 	}
 	
-	public User(String username, String password, int enabled) {
+	public User(String username, String password, boolean enabled) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -46,12 +53,21 @@ public class User {
 		this.password = password;
 	}
 
-	public int getEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(int enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+
+	public Authority getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Authority authority) {
+		this.authority = authority;
 	}
 
 	@Override
@@ -59,15 +75,7 @@ public class User {
 		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + enabled;
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
+	
 
 	@Override
 	public boolean equals(Object obj) {

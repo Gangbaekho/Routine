@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.routine.www.entity.Authority;
 import com.routine.www.entity.User;
 import com.routine.www.service.UserService;
 
@@ -22,9 +23,16 @@ public class UserController {
 	// save user by getting user information from client application
 	@PostMapping("/users")
 	public void createUser(@RequestBody User user) {
+
+		// create Authorities and set role : ROLE_USER
+		Authority authority = new Authority(user.getUsername(),"ROLE_USER");
 		
-		// save the user in db
+		// mapping authority to User by setAuthority method
+		user.setAuthority(authority);
+		
+		// save the user
 		service.save(user);
+	
 		
 	}
 	
