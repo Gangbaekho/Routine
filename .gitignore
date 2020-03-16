@@ -2,6 +2,9 @@
 # Created by https://www.gitignore.io/api/java,maven,eclipse
 # Edit at https://www.gitignore.io/?templates=java,maven,eclipse
 
+#Application.properties
+application.properties
+
 ### Eclipse ###
 .metadata
 bin/
@@ -97,6 +100,7 @@ local.properties
 hs_err_pid*
 
 ### Maven ###
+pom.xml
 target/
 pom.xml.tag
 pom.xml.releaseBackup
