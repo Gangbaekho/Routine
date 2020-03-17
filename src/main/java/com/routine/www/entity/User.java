@@ -1,10 +1,17 @@
 package com.routine.www.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,15 +33,21 @@ public class User {
 	@JoinColumn(name="authorities_username")
 	private Authority authority;
 	
+//	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+//            CascadeType.DETACH,CascadeType.REFRESH})
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="user_username")
+	private Collection<Summary> summaries = new LinkedHashSet<Summary>();
+	
 	public User() {
 		
 	}
 	
-	public User(String username, String password, boolean enabled) {
-		super();
+	public User(String username, String password, boolean enabled,Authority authority) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
+		this.authority = authority;
 	}
 
 	public String getUsername() {
@@ -69,13 +82,17 @@ public class User {
 	public void setAuthority(Authority authority) {
 		this.authority = authority;
 	}
-
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + "]";
+	
+	public void addSummary(Summary summary) {
+		this.summaries.add(summary);
 	}
 
 	
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", authority="
+				+ authority + ", summaries=" + summaries + "]";
+	}
 
 	@Override
 	public boolean equals(Object obj) {

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.routine.www.entity.Authority;
+import com.routine.www.entity.Question;
+import com.routine.www.entity.Summary;
 import com.routine.www.entity.User;
 import com.routine.www.service.UserService;
 
@@ -31,9 +33,9 @@ public class UserController {
 		user.setAuthority(authority);
 		
 		// save the user
-		service.save(user);
+		service.saveOrUpdate(user);
 	
-		
 	}
+	
 	
 }
