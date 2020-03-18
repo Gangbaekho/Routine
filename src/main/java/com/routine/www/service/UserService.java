@@ -15,17 +15,17 @@ import com.routine.www.entity.User;
 public class UserService {
 
 	@Autowired
-	private UserRepository repo;
+	private UserRepository userRepository;
 	
 	public void saveOrUpdate(User user) {
 		
-		repo.save(user);
+		userRepository.save(user);
 	}
 	
 	public User findUserByUsername(String username) {
 		
 		// get Optional<User> from user repository
-		Optional<User> optionalUser = repo.findById(username);
+		Optional<User> optionalUser = userRepository.findById(username);
 		
 		// if isPresent is true return real User
 		if(optionalUser.isPresent()) {
@@ -41,7 +41,7 @@ public class UserService {
 	
 	public void deleteUser(User user) {
 		
-		repo.delete(user);
+		userRepository.delete(user);
 	}
 	
 

@@ -31,9 +31,6 @@ public class UserTests {
 	@Autowired
 	private UserService uservice;
 	
-	@Test
-	public void test() {
-		uservice.saveTest();
-	}
+
 	
 }

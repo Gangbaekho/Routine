@@ -86,8 +86,11 @@ public class User {
 	public void addSummary(Summary summary) {
 		this.summaries.add(summary);
 	}
-
 	
+	public Collection<Summary> getSummaries() {
+		return summaries;
+	}
+
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", authority="
