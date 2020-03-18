@@ -98,7 +98,7 @@ public class SummaryController {
 		
 		// if user is authenticated
 		if (principal.getName().equals(username)) {
-			sservice.deleteSummary(id, username);
+			sservice.deleteSummary(id);
 		}
 		// if user is not authenticated
 		else {

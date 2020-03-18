@@ -55,16 +55,13 @@ public class SummaryService {
 	}
 
 	// delete summary
-	public void deleteSummary(long id, String username) {
+	public void deleteSummary(long id) {
+
+		// get real summary by helper method
+		Summary retrievedSummary = getRealSummary(id);
 		
-		// get real user by helper method
-		User retrievedUser = getRealUser(username);
-		
-		// if there is a same summary id. remove that summary in summaries
-		retrievedUser.getSummaries().removeIf(item->(item.getId()==id));
-		
-		// save user and summaries by cascading
-		srepo.saveAll(retrievedUser.getSummaries());
+		// delete it
+		srepo.delete(retrievedSummary);		
 		
 	}
 	
@@ -96,7 +93,7 @@ public class SummaryService {
 	// helper method for getting real user , not a optional user
 	private User getRealUser(String username) {
 
-		// get a user by user name
+		// get a optional user by user name
 		Optional<User> optionalUser = urepo.findById(username);
 
 		// if Optional User is present, use it.
@@ -107,6 +104,22 @@ public class SummaryService {
 		else
 			throw new RuntimeException("can not find the user");
 
+	}
+	
+	// helper method for getting real summary, not a optional summary
+	private Summary getRealSummary(long id) {
+		
+		// get a optional summary by id
+		Optional<Summary> optionalSummary = srepo.findById(id);
+		
+		// if optional summary is present, use it
+		if(optionalSummary.isPresent())
+			return optionalSummary.get();
+		
+		// else throw runtime exception error
+		else
+			throw new RuntimeException("can not find the summary..");
+		
 	}
 	
 
