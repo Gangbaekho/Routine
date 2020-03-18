@@ -55,19 +55,16 @@ public class SummaryService {
 	}
 
 	// delete summary
-	public void deleteSummary(Summary summary, String username) {
+	public void deleteSummary(long id, String username) {
 		
 		// get real user by helper method
 		User retrievedUser = getRealUser(username);
 		
-		// get summaries
-		Collection<Summary> summaries = retrievedUser.getSummaries();
-		
 		// if there is a same summary id. remove that summary in summaries
-		summaries.remove(summary);
+		retrievedUser.getSummaries().removeIf(item->(item.getId()==id));
 		
 		// save user and summaries by cascading
-		urepo.save(retrievedUser);
+		srepo.saveAll(retrievedUser.getSummaries());
 		
 	}
 	
