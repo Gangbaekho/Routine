@@ -1,4 +1,4 @@
-package com.routine.www.security.jwt;
+package com.routine.www.jwt;
 
 import java.util.Optional;
 
