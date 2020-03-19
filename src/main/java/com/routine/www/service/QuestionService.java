@@ -33,6 +33,15 @@ public class QuestionService {
 		return retrievedSummary.getQuestions();
 	}
 	
+	// find a question by question id
+	public Question findQuestionById(long questionId) {
+		
+		Question retrievedQuestion = getRealQuestion(questionId);
+		
+		return retrievedQuestion;
+		
+	}
+	
 	// create question and insert it to related summary by summary id
 	public void saveQuestion(Question question, long summaryId) {
 		

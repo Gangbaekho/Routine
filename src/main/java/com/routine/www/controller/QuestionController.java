@@ -41,7 +41,7 @@ public class QuestionController {
 	}
 
 	// get questions related summary by authenticated user and summaryId
-	@GetMapping("/question/{username}/{summaryId}")
+	@GetMapping("/questions/{username}/{summaryId}")
 	public Collection<Question> getQuestionsBySummaryId(@PathVariable String username, @PathVariable long summaryId,
 			Principal principal) {
 
@@ -49,6 +49,23 @@ public class QuestionController {
 		if (principal.getName().equals(username)) {
 
 			return qservice.findAllQuestionsRelatedSummary(summaryId);
+		}
+
+		// else throw runtime exception error
+		else {
+			throw new RuntimeException("you do not have a right...");
+		}
+
+	}
+
+	// get question by question id
+	@GetMapping("/question/{username}/{questionId}")
+	public Question getQuestionByQuestionId(@PathVariable String username, @PathVariable long questionId,
+			Principal principal) {
+		// if user is authenticated return Question
+		if (principal.getName().equals(username)) {
+
+			return qservice.findQuestionById(questionId);
 		}
 
 		// else throw runtime exception error
