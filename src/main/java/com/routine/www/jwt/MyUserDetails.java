@@ -13,6 +13,8 @@ import com.routine.www.entity.User;
 
 public class MyUserDetails implements UserDetails {
 	
+	
+	private static final long serialVersionUID = -749214524131251558L;
 	private String username;
 	private String password;
 	private boolean enabled;

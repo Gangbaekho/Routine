@@ -27,7 +27,7 @@ public class SummaryController {
 
 	// create summary by authenticated user
 	@PostMapping("/summary/{username}")
-	public void createSummary(@RequestBody Summary summary, @PathVariable String username, Principal principal) {
+	public void createSummary(@RequestBody Summary summary, @PathVariable String username, Principal principal){
 
 		// if user is authenticated
 		if (principal.getName().equals(username)) {

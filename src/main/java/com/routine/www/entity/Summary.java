@@ -48,8 +48,6 @@ public class Summary {
 	@JoinColumn(name="summary_id")
 	private Collection<Summary> related = new LinkedHashSet<Summary>();
 	
-//	@OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-//            CascadeType.DETACH,CascadeType.REFRESH})
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="summary_id")
 	private Collection<Question> questions = new LinkedHashSet<Question>();
