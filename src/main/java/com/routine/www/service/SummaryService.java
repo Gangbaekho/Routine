@@ -1,6 +1,7 @@
 package com.routine.www.service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -86,6 +87,13 @@ public class SummaryService {
 		User retrievedUser = getRealUser(username);
 		
 		return retrievedUser.getSummaries();
+		
+	}
+	
+	// find all user folders
+	public List<String> findAllUserFolder(String username){
+		
+		return srepo.findAllUserFolder(username);
 		
 	}
 

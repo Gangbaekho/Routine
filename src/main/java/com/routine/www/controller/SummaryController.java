@@ -2,6 +2,7 @@ package com.routine.www.controller;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -99,6 +100,20 @@ public class SummaryController {
 		// if user is authenticated
 		if (principal.getName().equals(username)) {
 			sservice.deleteSummary(id);
+		}
+		// if user is not authenticated
+		else {
+			throw new RuntimeException("you do not have a right..");
+		}
+	}
+	
+	// get all user's folders name
+	@GetMapping("/summary/{username}/folders")
+	public List<String> findAllUserFolder(@PathVariable String username, Principal principal){
+		
+		// if user is authenticated
+		if(principal.getName().equals(username)) {
+			return sservice.findAllUserFolder(username);
 		}
 		// if user is not authenticated
 		else {
