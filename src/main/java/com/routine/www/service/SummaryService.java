@@ -40,6 +40,12 @@ public class SummaryService {
 			throw new RuntimeException("can not find the Summary...");
 		}
 	}
+	
+	// find filtered summaries by 1,4,7,14,30 days before
+	public List<Summary> findFilteredSummary(String username){
+		
+		return srepo.findFilteredSummary(username);
+	}
 
 	// create summary and mapping with loggedin user
 	public void saveSummary(Summary summary, String username) {

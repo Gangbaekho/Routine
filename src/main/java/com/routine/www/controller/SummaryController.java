@@ -28,7 +28,7 @@ public class SummaryController {
 
 	// create summary by authenticated user
 	@PostMapping("/summary/{username}")
-	public void createSummary(@RequestBody Summary summary, @PathVariable String username, Principal principal){
+	public void createSummary(@RequestBody Summary summary, @PathVariable String username, Principal principal) {
 
 		// if user is authenticated
 		if (principal.getName().equals(username)) {
@@ -96,7 +96,7 @@ public class SummaryController {
 	@DeleteMapping("/summary/{username}/{id}")
 	public void deleteSummaryByUsernameAndId(@PathVariable String username, @PathVariable long id,
 			Principal principal) {
-		
+
 		// if user is authenticated
 		if (principal.getName().equals(username)) {
 			sservice.deleteSummary(id);
@@ -106,14 +106,28 @@ public class SummaryController {
 			throw new RuntimeException("you do not have a right..");
 		}
 	}
-	
+
 	// get all user's folders name
 	@GetMapping("/summary/{username}/folders")
-	public List<String> findAllUserFolder(@PathVariable String username, Principal principal){
-		
+	public List<String> findAllUserFolder(@PathVariable String username, Principal principal) {
+
 		// if user is authenticated
-		if(principal.getName().equals(username)) {
+		if (principal.getName().equals(username)) {
 			return sservice.findAllUserFolder(username);
+		}
+		// if user is not authenticated
+		else {
+			throw new RuntimeException("you do not have a right..");
+		}
+	}
+
+	// select filtered summaries by 1,4,7,14,30 days before
+	@GetMapping("/summary/{username}/routine")
+	public List<Summary> findFilteredSummary(@PathVariable String username, Principal principal) {
+
+		// if user is authenticated
+		if (principal.getName().equals(username)) {
+			return sservice.findFilteredSummary(username);
 		}
 		// if user is not authenticated
 		else {
